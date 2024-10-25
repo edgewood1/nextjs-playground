@@ -1,13 +1,18 @@
 import React from 'react';
 
-function Buttons({ children, onClick }) {
+interface ButtonProps {
+    children: React.ReactNode;
+    onClick: React.MouseEventHandler<HTMLButtonElement>
+  }
+  
+  function Buttons({ children, onClick }: ButtonProps) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isClicked, setIsClicked] = React.useState(false);
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200); // Reset after 200ms (adjust as needed)
-    onClick(); // Call the original onClick handler
+    onClick(event); // Call the original onClick handler
   };
 
   return (
@@ -26,13 +31,12 @@ function Buttons({ children, onClick }) {
         borderRadius: '4px',
         boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
         transition: 'all 0.3s ease',
-
-        ':active': {
-          boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
-          transform: 'translateY(1px)',
-        },
+        // ':active': {
+        //   boxShadow: '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
+        //   transform: 'translateY(1px)',
+        // },
       }}
-      onClick={handleClick} // Use the custom handleClick function
+      onClick={(e) => handleClick(e)} // Use the custom handleClick function
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

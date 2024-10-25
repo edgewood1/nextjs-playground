@@ -1,44 +1,57 @@
-'use client'
+'use client';
 import Image from "next/image";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Checkboxes from './components/Checkboxes';
-import Buttons from './components/Buttons'
+import Buttons from './components/Buttons';
 
+interface VerbInfo {
+  performer?: string;
+  mood?: string;
+  infinitive?: string;
+  performer_en?: string;
+  tense?: string;
+  has_long?: boolean;
+  translation?: string;
+}
+
+interface VerbsData {
+  [conjugation: string]: VerbInfo[];
+}
 
 export default function Home() {
-  const [verbs, setVerbs] = React.useState({});
-  const [verbList, setVerbList] = React.useState([])
-  const [selectedTenses, setSelectedTenses] = React.useState([]);
-  const [counter, setCounter] = React.useState(0)
+  const [verbs, setVerbs] = useState<VerbsData>({});
+  const [verbList, setVerbList] = useState<string[]>([]);
+  const [selectedTenses, setSelectedTenses] = useState<string[]>([]);
+  const [counter, setCounter] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  const fetchVerbs = async (e) => {
+  const fetchVerbs = async (e: string[]) => { // Type for 'e' corrected
     console.log('e', e);
     try {
       const tensesString = selectedTenses.join(',');
-      console.log(selectedTenses)
+      console.log(selectedTenses);
       const response = await fetch(`/api/filter-verbs?tenses=${e}`);
-      const data = await response.json();
+      const data: VerbsData = await response.json(); // Type assertion for 'data'
       setVerbs(data);
-      setVerbList(Object.keys(data)) // this is the display list
-    } catch(error) {
-      console.log(error)
+      setVerbList(Object.keys(data));
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const tenses = ['Present', 'Preterite', 'Imperfect']
-  
-  // passded down and called. 
-  const checkboxHandler =(e) => {
+  const tenses = ['Present', 'Preterite', 'Imperfect'];
+
+  const checkboxHandler = (e: string[]) => { // Type for 'e' added
+    console.log(e)
     fetchVerbs(e);
-  }
+  };
 
   const showQuestion = () => {
-    const verbObj = verbs[verbList[counter]]
-    console.log('verbi', verbs)
+    const verbObj = verbs[verbList[counter]] as VerbInfo;
+    console.log('verbi', verbs);
     let question;
-    const stem = `${verbObj?.performer} ___ ${verbObj?.infinitive} ___`
-    switch(verbObj?.tense) {
+    const stem = `${verbObj?.performer} ___ ${verbObj?.infinitive} ___`;
+    switch (verbObj?.tense) {
       case 'Present':
         question = `Hoy, ${stem}`;
         break;
@@ -47,22 +60,22 @@ export default function Home() {
         break;
       case 'Imperfect':
         question = `En el pasado, ${stem}`;
-      break;
-        default:
+        break;
+      default:
         question = '';
-        // code block
     }
-    return question
-  }
+    return question;
+  };
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
- 
+
   const handleCounter = () => {
-    setCounter(counter+1)
+    setCounter(counter + 1);
     setIsVisible(!isVisible);
-  }
+  };
+
   return (
     <>
     <div style={{ 
