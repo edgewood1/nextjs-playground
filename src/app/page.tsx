@@ -1,5 +1,5 @@
 'use client';
-import Image from "next/image";
+// import Image from "next/image";
 import React, { useState } from "react";
 import Checkboxes from './components/Checkboxes';
 import Buttons from './components/Buttons';
