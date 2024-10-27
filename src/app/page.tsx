@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Checkboxes from './components/Checkboxes';
 import Buttons from './components/Buttons';
+import Image from 'next/image';
 
 interface VerbInfo {
   performer?: string;
@@ -76,6 +77,10 @@ export default function Home() {
     setIsVisible(!isVisible);
   };
 
+  const handleHint = () => {
+    // return hint
+  }
+
   return (
     <>
     <div style={{ 
@@ -92,7 +97,7 @@ export default function Home() {
       padding: '10px', 
       width: '100%' 
     }}>
-      <h1 style={{ margin: 0, fontWeight: 'bold', fontSize: '2em' }}>Conjugation Practice</h1> 
+      <h1 style={{ color: 'blue', margin: 0, fontWeight: 'bold', fontSize: '2em' }}>Conjugation Practice</h1> 
       <Checkboxes items={tenses} onSubmit={checkboxHandler} />
     </div>
     
@@ -110,8 +115,21 @@ export default function Home() {
       {!isVisible && verbList.length > 0 && <Buttons onClick={toggleVisibility}>see answer</Buttons>}
       {isVisible &&  <div > Answer: {verbList[counter]}</div>}
     </div>
-     
-      {isVisible && <Buttons onClick={handleCounter}>next</Buttons>}
+      <div style={{display: 'flex'}}>
+      {isVisible && (
+        <>
+          <Buttons onClick={handleHint}>hint</Buttons>
+          <Buttons onClick={handleCounter}>next</Buttons>
+        </>
+      )}
+
+      </div>
+      <Image
+        src="/preterite.png" // Path to your image in the 'public' directory
+        alt="Description of your image"
+        width={500} // Desired width in pixels
+        height={300} // Desired height in pixels
+      />
     </main>
     </>
   );

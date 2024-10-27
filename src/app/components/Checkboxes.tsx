@@ -34,7 +34,7 @@ function Checkboxes({ items, onSubmit }: CheckboxProps) {
             checked={selectedValues.includes(item)}
             onChange={handleChange}
           />
-          <label htmlFor={`option${index}`}>{item}</label>
+          <label style={{color: 'blue', paddingLeft: '5px'}} htmlFor={`option${index}`}>{item}</label>
         </div>
       ))}
       <Buttons onClick={handleSubmit}>Submit</Buttons>
