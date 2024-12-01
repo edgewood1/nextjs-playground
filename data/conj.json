@@ -1,0 +1,304 @@
+{
+  "ar": {
+    "infinitive": "hablar",
+    "translation": "to speak",
+    "conjugations": {
+      "Indicative": {
+        "Present": {
+          "yo": "hablo",
+          "tú": "hablas",
+          "él/ella/usted": "habla",
+          "nosotros/as": "hablamos",
+          "vosotros/as": "habláis",
+          "ellos/as/ustedes": "hablan"
+        },
+        "Preterite": {
+          "yo": "hablé",
+          "tú": "hablaste",
+          "él/ella/usted": "habló",
+          "nosotros/as": "hablamos",
+          "vosotros/as": "hablasteis",
+          "ellos/as/ustedes": "hablaron"
+        },
+        "Imperfect": {
+          "yo": "hablaba",
+          "tú": "hablabas",
+          "él/ella/usted": "hablaba",
+          "nosotros/as": "hablábamos",
+          "vosotros/as": "hablabais",
+          "ellos/as/ustedes": "hablaban"
+        },
+        "Future": {
+          "yo": "hablaré",
+          "tú": "hablarás",
+          "él/ella/usted": "hablará",
+          "nosotros/as": "hablaremos",
+          "vosotros/as": "hablaréis",
+          "ellos/as/ustedes": "hablarán"
+        }
+      },
+      "Subjunctive": {
+        "Present": {
+          "yo": "hable",
+          "tú": "hables",
+          "él/ella/usted": "hable",
+          "nosotros/as": "hablemos",
+          "vosotros/as": "habléis",
+          "ellos/as/ustedes": "hablen"
+        },
+        "Imperfect (1)": {
+          "yo": "hablara",
+          "tú": "hablaras",
+          "él/ella/usted": "hablara",
+          "nosotros/as": "habláramos",
+          "vosotros/as": "hablarais",
+          "ellos/as/ustedes": "hablaran"
+        },
+        "Imperfect (2)": {
+          "yo": "hablase",
+          "tú": "hablases",
+          "él/ella/usted": "hablase",
+          "nosotros/as": "hablásemos",
+          "vosotros/as": "hablaseis",
+          "ellos/as/ustedes": "hablasen"
+        },
+        "Future": {
+          "yo": "hablare",
+          "tú": "hablares",
+          "él/ella/usted": "hablare",
+          "nosotros/as": "habláremos",
+          "vosotros/as": "hablareis",
+          "ellos/as/ustedes": "hablaren"
+        }
+      },
+      "Conditional": {
+        "Simple": {
+          "yo": "hablaría",
+          "tú": "hablarías",
+          "él/ella/usted": "hablaría",
+          "nosotros/as": "hablaríamos",
+          "vosotros/as": "hablaríais",
+          "ellos/as/ustedes": "hablarían"
+        }
+      },
+      "Imperative": {
+        "Affirmative": {
+          "tú": "habla",
+          "él/ella/usted": "hable",
+          "nosotros/as": "hablemos",
+          "vosotros/as": "hablad",
+          "ellos/as/ustedes": "hablen"
+        },
+        "Negative": {
+          "tú": "no hables",
+          "él/ella/usted": "no hable",
+          "nosotros/as": "no hablemos",
+          "vosotros/as": "no habléis",
+          "ellos/as/ustedes": "no hablen"
+        }
+      }
+    }
+  },
+
+  "er": {
+    "infinitive": "comer",
+    "translation": "to eat",
+    "conjugations": {
+      "Indicative": {
+        "Present": {
+          "yo": "como",
+          "tú": "comes",
+          "él/ella/usted": "come",
+          "nosotros/as": "comemos",
+          "vosotros/as": "coméis",
+          "ellos/as/ustedes": "comen"
+        },
+        "Preterite": {
+          "yo": "comí",
+          "tú": "comiste",
+          "él/ella/usted": "comió",
+          "nosotros/as": "comimos",
+          "vosotros/as": "comisteis",
+          "ellos/as/ustedes": "comieron"
+        },
+        "Imperfect": {
+          "yo": "comía",
+          "tú": "comías",
+          "él/ella/usted": "comía",
+          "nosotros/as": "comíamos",
+          "vosotros/as": "comíais",
+          "ellos/as/ustedes": "comían"
+        },
+        "Future": {
+          "yo": "comeré",
+          "tú": "comerás",
+          "él/ella/usted": "comerá",
+          "nosotros/as": "comeremos",
+          "vosotros/as": "comeréis",
+          "ellos/as/ustedes": "comerán"
+        }
+      },
+      "Subjunctive": {
+        "Present": {
+          "yo": "coma",
+          "tú": "comas",
+          "él/ella/usted": "coma",
+          "nosotros/as": "comamos",
+          "vosotros/as": "comáis",
+          "ellos/as/ustedes": "coman"
+        },
+        "Imperfect (1)": {
+          "yo": "comiera",
+          "tú": "comieras",
+          "él/ella/usted": "comiera",
+          "nosotros/as": "comiéramos",
+          "vosotros/as": "comierais",
+          "ellos/as/ustedes": "comieran"
+        },
+        "Imperfect (2)": {
+          "yo": "comiese",
+          "tú": "comieses",
+          "él/ella/usted": "comiese",
+          "nosotros/as": "comiésemos",
+          "vosotros/as": "comieseis",
+          "ellos/as/ustedes": "comiesen"
+        },
+        "Future": {
+          "yo": "comiere",
+          "tú": "comieres",
+          "él/ella/usted": "comiere",
+          "nosotros/as": "comiéremos",
+          "vosotros/as": "comiereis",
+          "ellos/as/ustedes": "comieren"
+        }
+      },
+      "Conditional": {
+        "Simple": {
+          "yo": "comería",
+          "tú": "comerías",
+          "él/ella/usted": "comería",
+          "nosotros/as": "comeríamos",
+          "vosotros/as": "comeríais",
+          "ellos/as/ustedes": "comerían"
+        }
+      },
+      "Imperative": {
+        "Affirmative": {
+          "tú": "come",
+          "él/ella/usted": "coma",
+          "nosotros/as": "comamos",
+          "vosotros/as": "comed",
+          "ellos/as/ustedes": "coman"
+        },
+        "Negative": {
+          "tú": "no comas",
+          "él/ella/usted": "no coma",
+          "nosotros/as": "no comamos",
+          "vosotros/as": "no comáis",
+          "ellos/as/ustedes": "no coman"
+        }
+      }
+    }
+  },
+
+  "ir": {
+    "infinitive": "vivir",
+    "translation": "to live",
+    "conjugations": {
+      "Indicative": {
+        "Present": {
+          "yo": "vivo",
+          "tú": "vives",
+          "él/ella/usted": "vive",
+          "nosotros/as": "vivimos",
+          "vosotros/as": "vivís",
+          "ellos/as/ustedes": "viven"
+        },
+        "Preterite": {
+          "yo": "viví",
+          "tú": "viviste",
+          "él/ella/usted": "vivió",
+          "nosotros/as": "vivimos",
+          "vosotros/as": "vivisteis",
+          "ellos/as/ustedes": "vivieron"
+        },
+        "Imperfect": {
+          "yo": "vivía",
+          "tú": "vivías",
+          "él/ella/usted": "vivía",
+          "nosotros/as": "vivíamos",
+          "vosotros/as": "vivíais",
+          "ellos/as/ustedes": "vivían"
+        },
+        "Future": {
+          "yo": "viviré",
+          "tú": "vivirás",
+          "él/ella/usted": "vivirá",
+          "nosotros/as": "viviremos",
+          "vosotros/as": "viviréis",
+          "ellos/as/ustedes": "vivirán"
+        }
+      },
+      "Subjunctive": {
+        "Present": {
+          "yo": "viva",
+          "tú": "vivas",
+          "él/ella/usted": "viva",
+          "nosotros/as": "vivamos",
+          "vosotros/as": "viváis",
+          "ellos/as/ustedes": "vivan"
+        },
+        "Imperfect (1)": {
+          "yo": "viviera",
+          "tú": "vivieras",
+          "él/ella/usted": "viviera",
+          "nosotros/as": "viviéramos",
+          "vosotros/as": "vivierais",
+          "ellos/as/ustedes": "vivieran"
+        },
+        "Imperfect (2)": {
+          "yo": "viviese",
+          "tú": "vivieses",
+          "él/ella/usted": "viviese",
+          "nosotros/as": "viviésemos",
+          "vosotros/as": "vivieseis",
+          "ellos/as/ustedes": "viviesen"
+        },
+        "Future": {
+          "yo": "viviere",
+          "tú": "vivieres",
+          "él/ella/usted": "viviere",
+          "nosotros/as": "viviéremos",
+          "vosotros/as": "viviereis",
+          "ellos/as/ustedes": "vivieren"
+        }
+      },
+      "Conditional": {
+        "Simple": {
+          "yo": "viviría",
+          "tú": "vivirías",
+          "él/ella/usted": "viviría",
+          "nosotros/as": "viviríamos",
+          "vosotros/as": "viviríais",
+          "ellos/as/ustedes": "vivirían"
+        }
+      },
+      "Imperative": {
+        "Affirmative": {
+          "tú": "vive",
+          "él/ella/usted": "viva",
+          "nosotros/as": "vivamos",
+          "vosotros/as": "vivid",
+          "ellos/as/ustedes": "vivan"
+        },
+        "Negative": {
+          "tú": "no vivas",
+          "él/ella/usted": "no viva",
+          "nosotros/as": "no vivamos",
+          "vosotros/as": "no viváis",
+          "ellos/as/ustedes": "no vivan"
+        }
+      }
+    }
+  }
+}

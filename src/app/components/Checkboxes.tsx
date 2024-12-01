@@ -1,5 +1,5 @@
-import React from 'react';
-import Buttons from './Buttons';
+import React from "react";
+import Buttons from "./Buttons";
 
 interface CheckboxProps {
   items: string[];
@@ -19,7 +19,7 @@ function Checkboxes({ items, onSubmit }: CheckboxProps) {
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = () => {
-    console.log('calling', onSubmit);
+    console.log("calling", onSubmit);
     onSubmit(selectedValues);
   };
 
@@ -34,7 +34,12 @@ function Checkboxes({ items, onSubmit }: CheckboxProps) {
             checked={selectedValues.includes(item)}
             onChange={handleChange}
           />
-          <label style={{color: 'blue', paddingLeft: '5px'}} htmlFor={`option${index}`}>{item}</label>
+          <label
+            style={{ color: "blue", paddingLeft: "5px" }}
+            htmlFor={`option${index}`}
+          >
+            {item}
+          </label>
         </div>
       ))}
       <Buttons onClick={handleSubmit}>Submit</Buttons>
