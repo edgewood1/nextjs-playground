@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { Header } from "./Header";
 import { Question } from "./Questions";
-import { MyContext } from "../page";
+import { MyContext } from "../context";
 import { HintTable } from "../components/Table";
 import { useMantineTheme } from "@mantine/core";
 import useQuestion from "../hooks/useQuestion";
@@ -30,7 +30,7 @@ const Body = () => {
   const questionObj = useQuestion(verbs);
   console.log("theme", theme);
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <div style={{ background: 'white', display: "flex", flexDirection: "column", height: "100vh" }}>
       <div
         style={{
           position: "fixed",

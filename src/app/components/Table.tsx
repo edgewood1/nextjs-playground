@@ -94,6 +94,7 @@ export const HintTable = (props) => {
         marginTop: "62vh",
         display: "flex",
         justifyContent: "center",
+        color: 'black'
       }}
     >
       <thead>

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { createContext, useContext } from "react";
 import { createTheme, MantineProvider, useMantineTheme } from '@mantine/core';
 import Body from './sections/Body';
+import { MyContext } from './context';
 
 const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
   primaryColor: 'cyan',
 });
 
-export const MyContext = createContext({}); // initialValue is optional
+// export const MyContext = createContext({}); // initialValue is optional
 
 interface VerbInfo {
   performer?: string;
