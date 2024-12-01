@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useMyContext } from "../context"
 
 import { Header } from "./Header";
 import { Question } from "./Questions";
@@ -6,6 +6,8 @@ import { MyContext } from "../context";
 import { HintTable } from "../components/Table";
 import { useMantineTheme } from "@mantine/core";
 import useQuestion from "../hooks/useQuestion";
+
+
 
 const Body = () => {
   const {
@@ -25,7 +27,7 @@ const Body = () => {
     setCurrentTense,
     showAnswer,
     setShowAnswer,
-  } = useContext(MyContext);
+  } = useMyContext();
   const theme = useMantineTheme();
   const questionObj = useQuestion(verbs);
   console.log("theme", theme);

@@ -1,8 +1,10 @@
 import next from "next";
 import React from "react";
+import {VerbInfo, VerbsData} from '../types/verbs';
 
-export const showQuestion = (verbs, verbList, counter) => {
-  const verbObj = verbs[verbList[counter]] as VerbInfo;
+
+export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number) => {
+  const verbObj = verbs[verbList[counter]] as VerbInfo
 
   let question;
   const stem = `${verbObj?.performer} ___ ${verbObj?.infinitive} ___`;
@@ -22,7 +24,8 @@ export const showQuestion = (verbs, verbList, counter) => {
   return question;
 };
 
-const useQuestion = (verbs) => {
+const useQuestion = (verbs: VerbsData) => {
+    console.log('----', verbs);
   const [counter, setCounter] = React.useState(0);
   const verbList = Object.keys(verbs);
 
@@ -34,11 +37,13 @@ const useQuestion = (verbs) => {
 
   const question = showQuestion(verbs, verbList, counter); // Calculate here
   const answer = verbList[counter];
-  const tense = verbs[answer].tense;
-  let infinitive = verbs[answer].infinitive.slice(-2);
+  const tense = (verbs[answer] as VerbInfo).tense;
+  const inf = (verbs[answer] as VerbInfo).infinitive;
+  
+  let infinitive = inf ? inf : '';
   infinitive =
-    infinitive === "se" ? verbs[answer].infinitive.slice(-4, -2) : infinitive;
-  const mood = verbs[answer].mood;
+    infinitive === "se" && inf ? inf : infinitive;
+  const mood = (verbs[answer] as VerbInfo).mood;
   console.log(verbs[answer]);
   return { question, answer, tense, nextQuestion, infinitive, mood };
 };

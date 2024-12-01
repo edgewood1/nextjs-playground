@@ -1,21 +1,8 @@
 import Checkboxes from "../components/Checkboxes";
 import React from "react";
+import { VerbsData } from "../types/verbs";
 
-interface VerbInfo {
-  performer?: string;
-  mood?: string;
-  infinitive?: string;
-  performer_en?: string;
-  tense?: string;
-  has_long?: boolean;
-  translation?: string;
-}
-
-interface VerbsData {
-  [conjugation: string]: VerbInfo[];
-}
-
-export const Header = (props) => {
+export const Header = (props: any) => {
   const { setVerbs } = props;
   const checkboxHandler = async (e: string[]) => {
     const tensesString = e.join(","); // Join the array into a comma-separated string

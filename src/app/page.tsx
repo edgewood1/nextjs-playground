@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { createContext, useContext } from "react";
 import { createTheme, MantineProvider, useMantineTheme } from '@mantine/core';
 import Body from './sections/Body';
 import { MyContext } from './context';
-
+import { VerbsData } from "./types/verbs";
 const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
   primaryColor: 'cyan',
@@ -13,19 +12,6 @@ const theme = createTheme({
 
 // export const MyContext = createContext({}); // initialValue is optional
 
-interface VerbInfo {
-  performer?: string;
-  mood?: string;
-  infinitive?: string;
-  performer_en?: string;
-  tense?: string;
-  has_long?: boolean;
-  translation?: string;
-}
-
-interface VerbsData {
-  [conjugation: string]: VerbInfo[];
-}
 
 export default function Home() {
   

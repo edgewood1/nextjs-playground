@@ -1,4 +1,6 @@
-const conjugations = {
+import { Conjugations, QO } from "../types/verbs";
+
+const conjugations: Conjugations = {
   Present: {
     ar: {
       yo: "o",
@@ -79,12 +81,15 @@ const conjugations = {
   },
 };
 
-export const HintTable = (props) => {
+type Prop = {
+  questionObj: QO
+}
+
+
+export const HintTable = (props: Prop) => {
   const { questionObj } = props;
-  const { answer, question, tense, nextQuestion, infinitive } = questionObj;
-  console.log("tense", tense);
-  console.log("infinitive", infinitive);
-  const term = conjugations[tense][infinitive];
+  const { answer, question, tense, nextQuestion, verbEnding } = questionObj;
+  const term = verbEnding && tense ? conjugations[tense][verbEnding] : 'Present';
   const styles = { border: "1px solid black", padding: "8px" };
 
   return (

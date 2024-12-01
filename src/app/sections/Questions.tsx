@@ -1,15 +1,21 @@
 import Buttons from "../components/Buttons";
 
-export const Question = (props) => {
+type Props = {
+  isQuestion: boolean;
+  verbList: string[];
+  toggleVisibility:any;
+  handleHint:any;
+  setHint:  any;
+  questionObj: any;
+}
+
+export const Question = (props: any) => {
   const {
     isQuestion,
-    // question,
-    counter,
     verbList,
     toggleVisibility,
     handleHint,
     setHint,
-    // handleCounter,
     questionObj = {},
   } = props;
   const { answer, question, nextQuestion, mood } = questionObj;
