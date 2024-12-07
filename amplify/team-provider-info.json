@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-spanish-dev-abb3a-authRole",
+      "UnauthRoleArn": "arn:aws:iam::809332431719:role/amplify-spanish-dev-abb3a-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::809332431719:role/amplify-spanish-dev-abb3a-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-spanish-dev-abb3a-deployment",
+      "UnauthRoleName": "amplify-spanish-dev-abb3a-unauthRole",
+      "StackName": "amplify-spanish-dev-abb3a",
+      "StackId": "arn:aws:cloudformation:us-east-1:809332431719:stack/amplify-spanish-dev-abb3a/8cb18ad0-b425-11ef-92d0-0eb45e5c7d2d",
+      "AmplifyAppId": "d3lpk9osga5au8"
+    }
+  }
+}
