@@ -28,10 +28,13 @@ export type Context = {
     setShowAnswer: React.Dispatch<React.SetStateAction<boolean>>; // Correct type
 }
 
+// return { question, answer, tense, nextQuestion, infinitive, mood };
 export type QO = {
     answer: string;
     question: string;
     tense: Tense | undefined;  // Allow tense to be undefined
+    infinitive: string;
+    mood: string;
     verbEnding?: VerbEnding;
     nextQuestion: () => void;
   }

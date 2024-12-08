@@ -1,9 +1,9 @@
 import next from "next";
 import React from "react";
-import {VerbInfo, VerbsData} from '../types/verbs';
+import {VerbInfo, VerbsData, QO} from '../types/verbs';
 
 
-export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number) => {
+export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number): QO => {
   const verbObj = verbs[verbList[counter]] as VerbInfo
 
   let question;

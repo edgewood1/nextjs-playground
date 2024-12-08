@@ -1,4 +1,4 @@
-import { Conjugations, QO } from "../types/verbs";
+import { Conjugations, QO, VerbEnding } from "../types/verbs";
 
 const conjugations: Conjugations = {
   Present: {
@@ -85,37 +85,51 @@ type Prop = {
   questionObj: QO
 }
 
+function getVerbEnding(infinitive: string): VerbEnding {
+  const ending = infinitive.slice(-2) as VerbEnding; 
+
+  if (ending === 'ar' || ending === 'er' || ending === 'ir') {
+    return ending;
+  } else {
+    throw new Error(`Invalid infinitive: ${infinitive}`);
+  }
+}
 
 export const HintTable = (props: Prop) => {
   const { questionObj } = props;
-  const { answer, question, tense, nextQuestion, verbEnding } = questionObj;
-  const term = verbEnding && tense ? conjugations[tense][verbEnding] : 'Present';
-  const styles = { border: "1px solid black", padding: "8px" };
-
-  return (
-    <table
-      data-testid="table"
-      style={{
-        marginTop: "62vh",
-        display: "flex",
-        justifyContent: "center",
+  const { question, answer, tense, nextQuestion, infinitive, mood } = questionObj;
+  
+  const verbEnding = getVerbEnding(infinitive);
+  const term = verbEnding && tense ? conjugations[tense][verbEnding] : {message: 'NA'}
+  
+  const styles = { 
+    padding: '5px', 
+    border: '1px solid black', 
+  }; 
+  
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
         color: 'black'
-      }}
-    >
-      <thead>
-        {/* <tr>
-            <th>Pronoun</th>
-            <th>Conjugation</th>
-          </tr> */}
-      </thead>
-      <tbody>
-        {Object.entries(term).map(([pronoun, conjugation]) => (
-          <tr key={pronoun}>
-            <td style={styles}>{pronoun}</td>
-            <td style={styles}>{conjugation}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
+      }}>
+        <table data-testid="table" style={{ borderCollapse: 'collapse' }}> 
+          <thead>
+            <tr>
+              <th style={styles}>Pronoun</th>
+              <th style={styles}>Conjugation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(term).map((obj, index) => ( 
+              <tr key={index}> {/* Use index as key (or a more unique identifier if available) */}
+                <td style={styles}>{obj[0]}</td>
+                <td style={styles}>{obj[1]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }

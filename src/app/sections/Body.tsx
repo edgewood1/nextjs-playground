@@ -33,7 +33,7 @@ const Body = () => {
   console.log("theme", theme);
   return (
     <div style={{ background: 'white', display: "flex", flexDirection: "column", height: "100vh" }}>
-      <div
+      {/* <div
         style={{
           position: "fixed",
           top: 0,
@@ -41,7 +41,7 @@ const Body = () => {
           zIndex: 1,
           height: "75vh",
         }}
-      >
+      > */}
         {/* <button style={{ color: theme.primaryColor }}>Hell    go</button> */}
         <Header {...{ setVerbs }} />
         <Question
@@ -60,18 +60,11 @@ const Body = () => {
           }}
         />
         {/* // answer */}
-      </div>
+      
       {/* hints */}
-      <div
-        style={{
-          flex: "1 0 auto",
-          overflowY: "auto",
-          marginTop: "55vh auto",
-        }}
-      >
         {hint === 1 && questionObj && <HintTable questionObj={questionObj} />}
         {hint === 2 && <p>Hint 2</p>}
-      </div>
+        {/* </div> */}
     </div>
   );
 };
