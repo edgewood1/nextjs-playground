@@ -3,7 +3,7 @@ import React from "react";
 import {VerbInfo, VerbsData, QO} from '../types/verbs';
 
 
-export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number): QO => {
+export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number) => {
   const verbObj = verbs[verbList[counter]] as VerbInfo
 
   let question;
@@ -19,7 +19,7 @@ export const showQuestion = (verbs: VerbsData, verbList: string[], counter: numb
       question = `En el pasado, ${stem}`;
       break;
     default:
-      question = "";
+      question = ``;
   }
   return question;
 };
@@ -43,7 +43,7 @@ const useQuestion = (verbs: VerbsData) => {
   let infinitive = inf ? inf : '';
   infinitive =
     infinitive === "se" && inf ? inf : infinitive;
-  const mood = (verbs[answer] as VerbInfo).mood;
+  const mood = (verbs[answer] as VerbInfo).mood || '';
   console.log(verbs[answer]);
   return { question, answer, tense, nextQuestion, infinitive, mood };
 };
