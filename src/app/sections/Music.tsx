@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Button as MantineButton } from '@mantine/core'; // Import Mantine Button
 
