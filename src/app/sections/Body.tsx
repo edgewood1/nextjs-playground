@@ -23,7 +23,7 @@ function createTemplate(var1: string, var2: string, var3: string): string {
   return `${var1} ${var2} <span style="text-decoration: underline;">${var3}</span>`;
 }
 
-function getArray(verbConjugations: VerbConjugation) {
+function getArray(verbConjugations: VerbConjugation[]) {
   return verbConjugations.map((verbObj) => {
     const key = Object.keys(verbObj)[0]; // Get the dynamic key (e.g., 'abandona')
     const details = verbObj[key]; // Get the inner object
@@ -39,20 +39,14 @@ function getArray(verbConjugations: VerbConjugation) {
   });
 }
 
-function formatVerbConjugations(verbs) {
-  return Object.entries(verbs).map(([key, value]) => ({ [key]: value }));
-}
-
 const Body = () => {
   const { verbs, setVerbs, verbList } = useMyContext();
   const [ arr, setArray ] = React.useState(null)
   const theme = useMantineTheme();
 
   React.useEffect(() => {
-
-    const formattedVerbs = formatVerbConjugations(verbs);
-    if (formattedVerbs.length > 0) {
-      const x = getArray(formattedVerbs);
+    if (verbs.length > 0) {
+      const x = getArray(verbs);
       setArray(x)
     }
   }, [verbs])
