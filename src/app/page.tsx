@@ -1,71 +1,28 @@
-"use client";
-
-import React, { useState } from "react";
-import { createTheme, MantineProvider, useMantineTheme } from '@mantine/core';
-import Body from './sections/Body';
-import { MyContext } from './context';
-import { VerbsData } from "./types/verbs";
-const theme = createTheme({
-  fontFamily: 'Open Sans, sans-serif',
-  primaryColor: 'cyan',
-});
-
-// export const MyContext = createContext({}); // initialValue is optional
-
+// Purpose: This file defines the UI for the root URL of your application (i.e., when a user navigates to /). It's essentially your homepage.
+// Rendering: The component exported from app/page.tsx will be rendered as the children inside your app/layout.tsx.
+// Content: This is where you put the specific content for your homepage.
+import { Container, Title, Text, Stack, Anchor, Group } from '@mantine/core';
+import Link from 'next/link'; // For client-side navigation
 
 export default function Home() {
-  
-  
-  
-  const [isQuestion, setIsQuestion] = useState(false);
-  const [hint, setHint] = useState(0);
-  const [currentTense, setCurrentTense] = useState('')
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [verbs, setVerbs] = React.useState<VerbsData>({});
-  const verbList = Object.keys(verbs) ?? [];
-  const toggleVisibility = () => {
-    setIsQuestion(!isQuestion);
-    // setHint(0);
-  };
-  
-
-  const handleCounter = () => {
-    // setCounter(counter + 1);
-    setIsQuestion(!isQuestion);
-  };
-
-  const handleHint = () => {
-    
-    let hintStatus = hint + 1;
-    if (hintStatus === 3) hintStatus = 0;
-    setHint(hintStatus);
-  };
-
-  const state = {
-
-    handleCounter,
-    isQuestion,
-    setIsQuestion,
-    currentTense, setCurrentTense,
-    toggleVisibility,
-    hint,
-    setHint,
-    handleHint,
-    verbs,
-    setVerbs,
-    verbList,
-    showAnswer,
-    setShowAnswer,
-    
-    
-  };
-  
   return (
-    <MantineProvider theme={theme}>      
-      <MyContext.Provider value={state}>
-        <Body />  
-      </MyContext.Provider>
-    </MantineProvider>
+    <Container size="md" pt={50}>
+      <Stack align="center">
+        <Title order={1} ta="center">
+          Welcome to Amplify!
+        </Title>
+        <Text ta="center">
+          This is the landing page. Explore our features or log in to get started.
+        </Text>
+        <Group mt="lg">
+          <Anchor component={Link} href="/login" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} size="lg">
+            Login
+          </Anchor>
+          <Anchor component={Link} href="/spanish" variant="gradient" gradient={{ from: 'teal', to: 'lime' }} size="lg">
+            Practice Spanish
+          </Anchor>
+        </Group>
+      </Stack>
+    </Container>
   );
 }
-

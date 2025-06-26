@@ -1,71 +1,94 @@
-import { useMyContext } from "../context"
+"use client";
 
+import { useMyContext } from "../context";
+import React from "react";
 import { Header } from "./Header";
-import { Question } from "./Questions";
-import { MyContext } from "../context";
-import { HintTable } from "../components/Table";
+import { Box } from '@mantine/core'
+
 import { useMantineTheme } from "@mantine/core";
-import useQuestion from "../hooks/useQuestion";
+
+import { FlashcardArray } from "react-quizlet-flashcard";
+import { VerbConjugation } from "../types/verbs";
+import { Nav } from "../components/Nav";
 
 
+
+const tenseMap = {
+  Present: 'Hoy, ',
+  Preterite: 'Preterite, ',
+  Imperfect: 'En el pasado, ',
+}
+
+function createTemplate(var1: string, var2: string, var3: string): string {
+  return `${var1} ${var2} <span style="text-decoration: underline;">${var3}</span>`;
+}
+
+function getArray(verbConjugations: VerbConjugation) {
+  return verbConjugations.map((verbObj) => {
+    const key = Object.keys(verbObj)[0]; // Get the dynamic key (e.g., 'abandona')
+    const details = verbObj[key]; // Get the inner object
+    const { performer, infinitive, tense } = details;
+    const day = tenseMap[tense];
+    
+    const stem = createTemplate(day, performer, infinitive)
+    return {
+      id: key, 
+      frontHTML: `<div>${stem}</div>`,
+      backHTML: `<div>${key}</div>`
+    };
+  });
+}
+
+function formatVerbConjugations(verbs) {
+  return Object.entries(verbs).map(([key, value]) => ({ [key]: value }));
+}
 
 const Body = () => {
-  const {
-    // counter,
-    // setCounter,
-    isQuestion,
-    setIsQuestion,
-    hint,
-    setHint,
-    verbs,
-    setVerbs,
-    verbList,
-    handleCounter,
-    handleHint,
-    toggleVisibility,
-    currentTense,
-    setCurrentTense,
-    showAnswer,
-    setShowAnswer,
-  } = useMyContext();
+  const { verbs, setVerbs, verbList } = useMyContext();
+  const [ arr, setArray ] = React.useState(null)
   const theme = useMantineTheme();
-  const questionObj = useQuestion(verbs);
-  console.log("theme", theme);
+
+  React.useEffect(() => {
+
+    const formattedVerbs = formatVerbConjugations(verbs);
+    if (formattedVerbs.length > 0) {
+      const x = getArray(formattedVerbs);
+      setArray(x)
+    }
+  }, [verbs])
+ 
+  const [screen, setScreen] = React.useState<string>("header");
+  
+  const style = {
+    backgroundColor: "lightgoldenrodyellow",
+    color: "black",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
   return (
-    <div style={{ background: 'white', display: "flex", flexDirection: "column", height: "100vh" }}>
-      {/* <div
+    <>
+      <Nav />
+      <div
         style={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          zIndex: 1,
-          height: "75vh",
+          background: "white",
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          fontSize: '21px'
         }}
-      > */}
-        {/* <button style={{ color: theme.primaryColor }}>Hell    go</button> */}
-        <Header {...{ setVerbs }} />
-        <Question
-          {...{
-            isQuestion,
-            questionObj,
-            verbList,
-            toggleVisibility,
-            handleHint,
-            verbs,
-            showAnswer,
-            setShowAnswer,
-            handleCounter,
-            setCurrentTense,
-            setHint,
-          }}
-        />
-        {/* // answer */}
-      
-      {/* hints */}
-        {hint === 1 && questionObj && <HintTable questionObj={questionObj} />}
-        {hint === 2 && <p>Hint 2</p>}
-        {/* </div> */}
-    </div>
+      >
+        {screen === "header" && <Header {...{ setVerbs, setScreen, screen }} />}
+        <Box style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
+        {arr !== null && <FlashcardArray        frontContentStyle={style} backContentStyle={style} cards={arr}/>}
+        </Box>
+
+        {/* {screen !== "answer" && screen !== "header" && (
+          <Hint {...{ questionObj, screen }} />
+        )} */}
+        
+      </div>
+    </>
   );
 };
 

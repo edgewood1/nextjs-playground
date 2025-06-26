@@ -10,18 +10,30 @@ export type Conjugations = {  // Changed to 'Conjugations'
   };
 };
 
+export type VerbConjugation = {
+  [key: string]: { // The dynamic key now points to an object
+    has_long: boolean;
+    infinitive: string;
+    mood: string;
+    performer: string;
+    performer_en: string;
+    tense: string;
+    translation: string;
+  };
+};
+
 
 export type Context = {
-    isQuestion: boolean;
-    setIsQuestion: React.Dispatch<React.SetStateAction<boolean>>;
-    hint: number;
-    setHint: React.Dispatch<React.SetStateAction<number>>; // Correct type
-    verbs: any;
+    // isQuestion: boolean;
+    // setIsQuestion: React.Dispatch<React.SetStateAction<boolean>>;
+    // hint: number;
+    // setHint: React.Dispatch<React.SetStateAction<number>>; // Correct type
+    verbs: VerbConjugation[];
     setVerbs: React.Dispatch<React.SetStateAction<VerbsData>>; // Correct type
     verbList: string[];
-    handleCounter: () => void;
-    handleHint: () => void;
-    toggleVisibility: () => void;
+    // handleCounter: () => void;
+    // handleHint: () => void;
+    // toggleVisibility: () => void;
     currentTense: string ;
     setCurrentTense: React.Dispatch<React.SetStateAction<string>>; // Correct type
     showAnswer: any;

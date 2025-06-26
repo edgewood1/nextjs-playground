@@ -1,9 +1,29 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import React from "react";
+import React, { Children } from "react";
+import { MantineProvider, createTheme } from "@mantine/core";
+
+const theme = createTheme({
+  fontFamily: "Open Sans, sans-serif",
+  primaryColor: "cyan",
+});
 
 const inter = Inter({ subsets: ["latin"] });
+
+console.log('Theme created in layout:', theme); // <-- Add this line
+
+
+// Purpose: This file defines the main shell or template for your entire application. Think of it as the outermost wrapper that will contain all your pages and other nested layouts.
+// Required: Every Next.js App Router project must have a root layout.tsx file directly under the app directory.
+// Content:
+// It must define the <html> and <body> tags. Next.js will automatically inject the necessary <head> content (like meta tags, links to stylesheets) unless you explicitly define a head.tsx file.
+// It receives a children prop. This children prop represents the content of the currently active route (which could be a page.tsx file or another nested layout.tsx).
+// Use Cases:
+// Defining global styles or importing global CSS files.
+// Including shared UI elements that appear on every page, such as a main header, footer, or a persistent sidebar.
+// Setting up context providers that need to be available application-wide.
+// Defining metadata (like <title> or <meta name="description">) that applies globally or as a default.
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,7 +32,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <MantineProvider theme={theme}>
+          {children}
+        </MantineProvider>
+      </body>
     </html>
   );
 }

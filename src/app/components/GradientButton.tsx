@@ -1,13 +1,17 @@
+"use client"; // Add this directive
+
 import React from "react";
 import { Button as MantineButton, ButtonProps as MantineButtonProps, MantineTheme, useMantineTheme } from '@mantine/core';
 
-interface CustomButtonProps extends Omit<MantineButtonProps, 'onClick' | 'children' | 'variant' | 'styles' | 'sx'> {
+interface CustomButtonProps extends Omit<React.ComponentProps<typeof MantineButton>, 'onClick' | 'children' | 'variant' | 'styles' | 'sx'> {
+
   children: React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Buttons({ children, onClick, ...rest }: CustomButtonProps) {
+function GradientButton({ children, onClick, ...rest }: CustomButtonProps) {
   const theme = useMantineTheme();
+  console.log('theme', theme)
   const [isClicked, setIsClicked] = React.useState(false);
 
   const handleClick = (
@@ -21,6 +25,11 @@ function Buttons({ children, onClick, ...rest }: CustomButtonProps) {
   const defaultGradient = { from: '#B2FEFA', to: '#0ED2F7', deg: 90 };
   const hoverGradient = { from: '#0ED2F7', to: '#B2FEFA', deg: 90 };
 
+    // Helper function to manually create the gradient string
+    const createGradientString = (gradient: { from: string; to: string; deg: number }) => {
+      return `linear-gradient(${gradient.deg}deg, ${gradient.from} 0%, ${gradient.to} 100%)`;
+    };
+  
   // Using a theme color as a placeholder for the original "dark-brown"
   const regularTextColor = theme.colors.dark[3]; 
   const clickedTextColor = theme.black;
@@ -31,7 +40,9 @@ function Buttons({ children, onClick, ...rest }: CustomButtonProps) {
     <MantineButton
       onClick={handleClick}
       sx={{
-        background: theme.fn.gradient(defaultGradient),
+        // background: theme.fn.gradient(defaultGradient),
+        background: createGradientString(defaultGradient), // Use manual gradient string
+
         border: "none",
         color: isClicked ? clickedTextColor : regularTextColor,
         padding: "12px 24px",
@@ -43,7 +54,8 @@ function Buttons({ children, onClick, ...rest }: CustomButtonProps) {
         zIndex: 10, // Preserved from the original wrapper div, applied to the button itself
 
         '&:hover': {
-          background: theme.fn.gradient(hoverGradient),
+          background: createGradientString(defaultGradient), // Use manual gradient string
+
         },
         '&:active': {
           // Replicate original (commented out in source) active styles
@@ -58,4 +70,4 @@ function Buttons({ children, onClick, ...rest }: CustomButtonProps) {
   );
 }
 
-export default Buttons;
+export default GradientButton;

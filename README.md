@@ -44,3 +44,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 [ ] - hints always show -ir // should show correct
 [ ] - irregulars? 
   
+
+Start db
+  docker-compose up -d
+npx prisma db push
+
+
+add an inbound rule for type: postgresqul port rnage: 5432 source My IP
+thi sis about security group
+
+can i choose no public access if i'm hosting my app in amplify?

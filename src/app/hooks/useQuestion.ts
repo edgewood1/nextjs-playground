@@ -1,6 +1,6 @@
 import next from "next";
 import React from "react";
-import {VerbInfo, VerbsData, QO} from '../types/verbs';
+import {VerbInfo, VerbsData, VerbConjugation, QO} from '../types/verbs';
 
 
 export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number) => {
@@ -24,8 +24,7 @@ export const showQuestion = (verbs: VerbsData, verbList: string[], counter: numb
   return question;
 };
 
-const useQuestion = (verbs: VerbsData) => {
-    console.log('----', verbs);
+const useQuestion = (verbs: VerbConjugation) => {
   const [counter, setCounter] = React.useState(0);
   const verbList = Object.keys(verbs);
 
@@ -44,7 +43,7 @@ const useQuestion = (verbs: VerbsData) => {
   infinitive =
     infinitive === "se" && inf ? inf : infinitive;
   const mood = (verbs[answer] as VerbInfo).mood || '';
-  console.log(verbs[answer]);
+  // console.log(verbs[answer]);
   return { question, answer, tense, nextQuestion, infinitive, mood };
 };
 

@@ -1,5 +1,8 @@
+"use client"; // Mark as Client Component
+
 import React from "react";
-import Buttons from "./Buttons";
+import GradientButton from "./GradientButton";
+import { Box, Text } from "@mantine/core";
 
 interface CheckboxProps {
   items: string[];
@@ -19,31 +22,35 @@ function Checkboxes({ items, onSubmit }: CheckboxProps) {
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = () => {
-    console.log("calling", onSubmit);
     onSubmit(selectedValues);
   };
 
   return (
-    <div>
+    <>
+    <Box ml={5}> {/* Use Mantine's Box with margin prop */}
       {items.map((item, index) => (
-        <div key={index}>
+        <Box key={index} mb={5}> {/* Add some margin bottom for spacing */}
           <input
             type="checkbox"
             id={`option${index}`}
             value={item}
             checked={selectedValues.includes(item)}
             onChange={handleChange}
+            style={{ marginRight: '5px' }} // Keep simple inline style for input or use Mantine's Checkbox
           />
-          <label
-            style={{ color: "blue", paddingLeft: "5px" }}
-            htmlFor={`option${index}`}
-          >
-            {item}
-          </label>
-        </div>
+              <Text
+                component="label"
+                htmlFor={`option${index}`}
+                c="blue" // Mantine's color prop
+                // pl={5} // Mantine's padding prop if needed, but input margin might be enough
+              >
+                {item}
+              </Text>
+            </Box>
       ))}
-      <Buttons onClick={handleSubmit}>Submit</Buttons>
-    </div>
+    </Box>
+      <GradientButton onClick={handleSubmit}>Submit</GradientButton>
+    </>
   );
 }
 
