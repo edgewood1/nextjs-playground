@@ -12,9 +12,9 @@ export default function SpanishPage() {
   const [currentTense, setCurrentTense] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   // Change verbs state to be an array of VerbConjugation
-  const [verbs, setVerbs] = React.useState<VerbConjugation[]>([]); 
-  // Update verbList derivation for an array of VerbConjugation objects
-  const verbList = React.useMemo(() => verbs.map(verbObj => Object.keys(verbObj)[0]), [verbs]);
+  const [verbs, setVerbs] = React.useState<VerbConjugation[]>([]);
+  // The verbList should be an array of the conjugated forms (the answers).
+  const verbList = React.useMemo(() => verbs.map(verb => verb.translation), [verbs]);
 
   const state = {
     currentTense,

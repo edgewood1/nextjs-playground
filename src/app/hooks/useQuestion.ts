@@ -1,50 +1,49 @@
-import next from "next";
 import React from "react";
-import {VerbInfo, VerbsData, VerbConjugation, QO} from '../types/verbs';
+import { VerbConjugation, QO } from '../types/verbs';
 
-
-export const showQuestion = (verbs: VerbsData, verbList: string[], counter: number) => {
-  const verbObj = verbs[verbList[counter]] as VerbInfo
-
-  let question;
-  const stem = `${verbObj?.performer} ___ ${verbObj?.infinitive} ___`;
-  switch (verbObj?.tense) {
-    case "Present":
-      question = `Hoy, ${stem}`;
-      break;
-    case "Preterite":
-      question = `Ayer,${stem}`;
-      break;
-    case "Imperfect":
-      question = `En el pasado, ${stem}`;
-      break;
-    default:
-      question = ``;
-  }
-  return question;
+// This map helps create context for the question.
+const tenseMap = {
+  Present: 'Hoy, ',
+  Preterite: 'Ayer, ',
+  Imperfect: 'En el pasado, ',
 };
 
-const useQuestion = (verbs: VerbConjugation) => {
+/**
+ * A custom hook to manage the current question logic from a list of verbs.
+ * @param verbs An array of verb conjugation objects.
+ * @returns A question object (QO) or undefined if no verbs are provided.
+ */
+const useQuestion = (verbs: VerbConjugation[]): QO | undefined => {
   const [counter, setCounter] = React.useState(0);
-  const verbList = Object.keys(verbs);
 
   const nextQuestion = () => {
-    setCounter((prevCounter) => (prevCounter + 1) % verbList.length);
+    // Cycle through the verbs array.
+    setCounter((prevCounter) => (prevCounter + 1) % verbs.length);
   };
 
-  if (verbList.length === 0) return;
+  // If there are no verbs, there's no question to return.
+  if (verbs.length === 0) {
+    return undefined;
+  }
 
-  const question = showQuestion(verbs, verbList, counter); // Calculate here
-  const answer = verbList[counter];
-  const tense = (verbs[answer] as VerbInfo).tense;
-  const inf = (verbs[answer] as VerbInfo).infinitive;
-  
-  let infinitive = inf ? inf : '';
-  infinitive =
-    infinitive === "se" && inf ? inf : infinitive;
-  const mood = (verbs[answer] as VerbInfo).mood || '';
-  // console.log(verbs[answer]);
-  return { question, answer, tense, nextQuestion, infinitive, mood };
+  // Get the current verb object from the array.
+  const currentVerb = verbs[counter];
+  const { performer, infinitive, tense, translation, mood } = currentVerb;
+
+  // Create the question string.
+  const tensePrefix = tenseMap[tense as keyof typeof tenseMap] || '';
+  const stem = `${performer} ___ ${infinitive}`;
+  const question = `${tensePrefix}${stem}`;
+
+  // Return the question object in the shape that components expect.
+  return {
+    question,
+    answer: translation,
+    tense: tense as QO['tense'], // Cast to the specific Tense type
+    infinitive,
+    mood,
+    nextQuestion,
+  };
 };
 
 export default useQuestion;
