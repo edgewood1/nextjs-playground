@@ -1,69 +1,42 @@
 import GradientButton from "../components/GradientButton";
-import { Button, Stack, Box } from "@mantine/core";
-import { MyContext } from "../context";
+import { Stack, Box, Text } from "@mantine/core";
 import { FlashcardArray } from "react-quizlet-flashcard";
+
 type Props = {
-  // isQuestion: boolean;
-  verbList: string[];
-  // setIsQuestion: any;
-  // handleHint: any;
-  // setHint: any;
-  screen: any;
-  setScreen: any;
-  questionObj: any;
+  questionObj: {
+    question: React.ReactNode;
+    answer: React.ReactNode;
+    nextQuestion: () => void;
+    mood: string;
+  };
 };
 
 export const Question = (props: Props) => {
-  const {
-    // isQuestion,
-    verbList,
-    // setIsQuestion,
-    screen,
-    questionObj = {},
-    setScreen,
-  } = props;
-  const { answer, question, nextQuestion, mood } = questionObj;
+  const { questionObj } = props;
+  const { answer, question, nextQuestion, mood } = questionObj || {};
 
-  const handleSeeAnswer = () => {
-    // setIsQuestion(!isQuestion)
-    setScreen("answer");
-    console.log("setting question");
-  };
-
-  const handleNextQuestion = () => {
-    setScreen("question");
-    // ... perform some logic, e.g., check the answer ...
-    nextQuestion(); // Call nextQuestion to move to the next question
-
-    // toggleVisibility();
-  };
-  // console.log("qo", questionObj);
-  // console.log('verb list', verbList);
-  console.log("see anwswer", screen);
+  // The FlashcardArray component requires an array of cards.
+  // We create an array with a single card from the current question object.
+  const cards = question
+    ? [
+        {
+          front: <Text size="xl">{question}</Text>,
+          back: <Text size="xl">{answer}</Text>,
+        },
+      ]
+    : [];
 
   return (
-    <Stack
-      align="center"
-      gap="10px"
-      p="10px" // padding
-      style={{ width: "100%", zIndex: 10, color: "black" }} // color can be set via theme or Text component
-    >
-      {
-        <>
-          <Box>Mood: {mood} </Box> {/* Or Mantine's Text component */}
-          <FlashcardArray>
-          {/* <div>{question}</div> */} {/* This was likely a placeholder for Flashcard content */}
-          {/* <GradientButton onClick={handleSeeAnswer}>see answer</GradientButton> */}
-        </>
-      }
-      {/* {screen === "answer" && (
-        <>
-          <div> Answer: {answer}</div>
-          <div style={{ display: "flex" }}>
-            <GradientButton onClick={handleNextQuestion}>next</GradientButton>
-          </div>
-        </>
-      )} */}
+    <Stack align="center" gap="xl" p="md" style={{ width: "100%", zIndex: 10 }}>
+      <Text c="dimmed">Mood: {mood}</Text>
+      
+      {/* The FlashcardArray component handles flipping between front and back */}
+      <FlashcardArray cards={cards} />
+      
+      <GradientButton 
+        onClick={nextQuestion}>
+          Next Question
+      </GradientButton>
     </Stack>
   );
 };

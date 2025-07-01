@@ -1,42 +1,41 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button as MantineButton } from '@mantine/core'; // Import Mantine Button
+
+const songs = ['Ida Red', 'Mississippi Sawyer', 'Molly Hare', 'Road to Malvern', 'Johnny dont get drunk'];
+
+const map: { [key: string]: string } = {
+  'Ida Red': 'ida_red.mp3',
+  'Molly Hare': 'old_molly.mp3',
+  'Mississippi Sawyer': 'miss_sawyer.mp3',
+  'Road to Malvern': 'road_to.m4a',
+  'Johnny dont get drunk': 'johnny_dont.m4a',
+};
 
 function AudioPlayer() {
   const [currentSong, setCurrentSong] = useState('');
   const [selectedSong, setSelectedSong] = useState('');
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const songs = ['Ida Red', 'Mississippi Sawyer', 'Molly Hare', 'Road to Malvern', 'Johnny dont get drunk'];
-
-  const map: {[key:string]: any} = {
-    'Ida Red': 'ida_red.mp3', 
-    'Molly Hare': 'old_molly.mp3',
-    'Mississippi Sawyer': 'miss_sawyer.mp3',
-    'Road to Malvern': 'road_to.m4a',
-    'Johnny dont get drunk': 'johnny_dont.m4a',
-
-  }
-
-  const loadRandomSong = () => {
+  const loadRandomSong = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * songs.length);
     const songName = songs[randomIndex];
     const songTitle = map[songName];
     setCurrentSong(songName);
     setSelectedSong('');
-    setIsCorrect(false);
+    setIsCorrect(null);
 
     if (audioRef.current) {
       audioRef.current.src = `/${songTitle}`; // Assuming your files are named like 'Ida Red.mp3'
       audioRef.current.load(); // Load the new audio source
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadRandomSong(); // Load a random song when the component mounts
-  }, []);
+  }, [loadRandomSong]);
 
   const handleSongSelect = (song: string) => {
     setSelectedSong(song);
@@ -47,7 +46,6 @@ function AudioPlayer() {
     }
   };
 
-  
   const createSongChoices = () => {
     // Shuffle the songs array to create random choices
     const shuffledSongs = [...songs].sort(() => 0.5 - Math.random());
@@ -72,7 +70,7 @@ function AudioPlayer() {
         {createSongChoices()}
       </div>
 
-      {selectedSong && (
+      {selectedSong && isCorrect !== null && (
         <div>
           {isCorrect ? 'Correct!' : 'Incorrect'}
         </div>

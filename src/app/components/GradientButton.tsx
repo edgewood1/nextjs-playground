@@ -4,9 +4,9 @@ import React from "react";
 import { Button as MantineButton, ButtonProps as MantineButtonProps, MantineTheme, useMantineTheme } from '@mantine/core';
 
 interface CustomButtonProps extends Omit<React.ComponentProps<typeof MantineButton>, 'onClick' | 'children' | 'variant' | 'styles' | 'sx'> {
-
-  children: React.ReactNode;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+onClick: (React.MouseEventHandler<HTMLButtonElement>;)
+  // children: React.ReactNode;
+  
 }
 
 function GradientButton({ children, onClick, ...rest }: CustomButtonProps) {
