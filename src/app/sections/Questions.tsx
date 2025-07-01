@@ -27,16 +27,19 @@ export const Question = (props: Props) => {
     : [];
 
   return (
-    <Stack align="center" gap="xl" p="md" style={{ width: "100%", zIndex: 10 }}>
-      <Text c="dimmed">Mood: {mood}</Text>
-      
-      {/* The FlashcardArray component handles flipping between front and back */}
-      <FlashcardArray cards={cards} />
-      
-      <GradientButton 
-        onClick={nextQuestion}>
+    // Use Tailwind for page-level layout and constraints.
+    <div className="w-full max-w-xl mx-auto p-4">
+      {/* Use Mantine's Stack for managing the layout of Mantine components. */}
+      <Stack align="center" gap="xl">
+        <Text c="dimmed">Mood: {mood}</Text>
+
+        {/* The FlashcardArray component handles flipping between front and back */}
+        <FlashcardArray cards={cards} />
+
+        <GradientButton onClick={nextQuestion} size="lg" radius="md">
           Next Question
-      </GradientButton>
-    </Stack>
+        </GradientButton>
+      </Stack>
+    </div>
   );
 };
