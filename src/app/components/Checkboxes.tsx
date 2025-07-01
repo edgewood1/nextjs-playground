@@ -1,8 +1,7 @@
 "use client"; // Mark as Client Component
 
 import React, { useState, MouseEventHandler } from "react";
-import GradientButton from "./GradientButton";
-import { Box, Checkbox, Group } from "@mantine/core";
+import { Box, Button, Checkbox, Group } from "@mantine/core";
 
 interface CheckboxesProps {
   items: string[];
@@ -38,7 +37,7 @@ function Checkboxes({ items, onSubmit }: CheckboxesProps) {
           ))}
         </Group>
       </Box>
-      <GradientButton onClick={handleSubmit} mt="md">Submit</GradientButton>
+      <Button onClick={handleSubmit} mt="md">Submit</Button>
     </>
   );
 }

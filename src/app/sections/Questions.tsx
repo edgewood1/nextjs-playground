@@ -1,5 +1,4 @@
-import GradientButton from "../components/GradientButton";
-import { Stack, Box, Text } from "@mantine/core";
+import { Stack, Box, Text, Button } from "@mantine/core";
 import { FlashcardArray } from "react-quizlet-flashcard";
 
 type Props = {
@@ -36,9 +35,9 @@ export const Question = (props: Props) => {
         {/* The FlashcardArray component handles flipping between front and back */}
         <FlashcardArray cards={cards} />
 
-        <GradientButton onClick={nextQuestion} size="lg" radius="md">
+        <Button onClick={nextQuestion} size="lg" radius="md">
           Next Question
-        </GradientButton>
+        </Button>
       </Stack>
     </div>
   );
