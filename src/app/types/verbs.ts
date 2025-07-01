@@ -10,18 +10,15 @@ export type Conjugations = {  // Changed to 'Conjugations'
   };
 };
 
-export type VerbConjugation = {
-  [key: string]: { // The dynamic key now points to an object
-    has_long: boolean;
-    infinitive: string;
-    mood: string;
-    performer: string;
-    performer_en: string;
-    tense: string;
-    translation: string;
-  };
-};
-
+export interface VerbConjugation {
+  infinitive: string;
+  has_long: boolean;
+  mood: string;
+  performer: string;
+  performer_en: string;
+  tense: string;
+  translation: string;
+}
 
 export type Context = {
     // isQuestion: boolean;
