@@ -1,22 +1,32 @@
-"use client"; // Mark as Client Component
+"use client";
 
-import React from "react";
-import GradientButton from "../components/GradientButton";
+import React, { useState } from "react";
+import { Button } from "@mantine/core";
 import { HintTable } from "../components/Table";
-export const Hint = (props: any) => {
-  const { questionObj, screen } = props;
-  const [hint, setHint] = React.useState(0);
+import { QO } from "../types/verbs";
+
+interface HintProps {
+  questionObj: QO;
+  screen: string;
+}
+
+export const Hint = ({ questionObj, screen }: HintProps) => {
+  const [showHint, setShowHint] = useState(false);
+
   const handleHint = () => {
-    setHint((prevHint) => (prevHint + 1) % 3);
+    setShowHint(!showHint);
   };
 
-  console.log("screen", screen);
-  if (screen === "header") return <></>;
+  if (screen === "header") {
+    return null;
+  }
+
   return (
     <>
-      <GradientButton onClick={handleHint}>hint</GradientButton>
-      {hint === 1 && <HintTable questionObj={questionObj} />}
-      {hint === 2 && <p>Hint 2</p>}
+      <Button onClick={handleHint} variant="light" size="xs" mt="md">
+        {showHint ? "Hide Hint" : "Show Hint"}
+      </Button>
+      {showHint && <HintTable questionObj={questionObj} />}
     </>
   );
 };

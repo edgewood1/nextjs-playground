@@ -2,10 +2,11 @@
 
 import { useMyContext } from "../context";
 import React from "react";
-import { Box } from '@mantine/core'
+import { Box, Stack } from '@mantine/core'
 import { Nav } from "../components/Nav";
 import { Header } from "./Header";
 import { Question } from "./Questions";
+import { Hint } from "./Hint";
 import useQuestion from "../hooks/useQuestion";
 
 const Body = () => {
@@ -26,11 +27,12 @@ const Body = () => {
         }}
       >
         {screen === "header" && <Header {...{ setVerbs, setScreen, screen }} />}
-        {screen === "question" && questionObj && (
-          <Box style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
-            <Question questionObj={questionObj} />
-          </Box>
-        )}
+        {screen === "question" && questionObj &&
+          <Stack align="center" mt="xl">
+            <Question questionObj={questionObj}/>
+            <Hint questionObj={questionObj} screen={screen}/>
+          </Stack>
+        }
       </div>
     </>
   );
