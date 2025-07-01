@@ -33,10 +33,9 @@ export type Context = {
     verbList: string[];
     // handleCounter: () => void;
     // handleHint: () => void;
-    // toggleVisibility: () => void;
     currentTense: string ;
     setCurrentTense: React.Dispatch<React.SetStateAction<string>>; // Correct type
-    showAnswer: any;
+    showAnswer: boolean;
     setShowAnswer: React.Dispatch<React.SetStateAction<boolean>>; // Correct type
 }
 
