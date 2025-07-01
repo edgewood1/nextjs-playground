@@ -1,39 +1,38 @@
 import { NextResponse } from 'next/server';
-import verbsData from '../../../../data/verbs.json';
-import { VerbsData, VerbInfo } from '../../types/verbs'; // Assuming you have these types
+import verbsJson from '@/data/verbs.json';
+import { VerbsData, VerbConjugation } from '@/app/types/verbs';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+// By explicitly casting the imported JSON to the VerbsData type,
+// we inform TypeScript that it has an index signature, which resolves the error.
+const verbsData: VerbsData = verbsJson;
 
+export async function POST(request: Request) {
   try {
-    // Get parameters and ensure they are arrays of strings
-    const tenses = searchParams.get('tenses')?.split(',') || [];
-    const moods = searchParams.get('mood')?.split(',') || []; // Renamed from 'mood' to 'moods' for clarity
+    const body = await request.json();
+    const { tenses, moods } = body;
 
-    // Validate parameters (optional but recommended)
-    if (tenses.length === 0 || moods.length === 0) {
-       return NextResponse.json({ error: 'Missing required parameters: tenses and mood' }, { status: 400 });
+    if (!Array.isArray(tenses) || !Array.isArray(moods)) {
+      return new NextResponse('Missing or invalid tenses or moods', { status: 400 });
     }
 
-    // Filter verbs: Keep entries where tense is in tenses AND mood is in moods
-    const filteredVerbs: VerbsData = {};
+    const filteredVerbs: { [key: string]: VerbConjugation[] } = {};
 
     for (const conjugation in verbsData) {
-      if (verbsData.hasOwnProperty(conjugation)) {
-        const verbInfoArray: VerbInfo[] = verbsData[conjugation];
+      if (Object.prototype.hasOwnProperty.call(verbsData, conjugation)) {
+        const verbInfoArray: VerbConjugation[] = verbsData[conjugation];
         const matchingEntries = verbInfoArray.filter(verbInfo =>
           verbInfo.tense && tenses.includes(verbInfo.tense) &&
           verbInfo.mood && moods.includes(verbInfo.mood)
         );
+
         if (matchingEntries.length > 0) {
           filteredVerbs[conjugation] = matchingEntries;
         }
       }
     }
-
     return NextResponse.json(filteredVerbs);
   } catch (error) {
-    console.error('API Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('FILTER_VERBS_ERROR', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

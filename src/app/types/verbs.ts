@@ -47,18 +47,7 @@ export type QO = {
     nextQuestion: () => void;
   }
   
-
-export interface VerbInfo {
-    performer?: string;
-    mood?: string;
-    infinitive?: string;
-    performer_en?: string;
-    tense?: Tense | undefined;
-    has_long?: boolean;
-    translation?: string;
-  }
-
   
   export interface VerbsData {
-    [conjugation: string]: VerbInfo[];
+    [conjugation: string]: VerbConjugation[];
   }
