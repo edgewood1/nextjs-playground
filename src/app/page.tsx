@@ -12,9 +12,7 @@ export default function Home() {
         <Text>
           This is the main entry point of the application.
         </Text>
-        <Link href="/spanish" passHref>
-          <Button component="a">Go to Spanish Verbs</Button>
-        </Link>
+        <Button component={Link} href="/spanish">Go to Spanish Verbs</Button>
       </Stack>
     </Container>
   );
