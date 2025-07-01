@@ -1,9 +1,7 @@
 // /Users/meldejesus/Desktop/Amplify/app/api/register/route.ts
-import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
+import prisma from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
