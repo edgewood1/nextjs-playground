@@ -6,7 +6,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from "next-auth/providers/github";
 import prisma from '@/lib/prisma';
 
-export const authOptions: AuthOptions = {
+// This should not be exported from a route file.
+const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
