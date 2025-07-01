@@ -17,15 +17,8 @@ const Body = () => {
   return (
     <>
       <Nav />
-      <div
-        style={{
-          background: "white",
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          fontSize: '21px'
-        }}
-      >
+      {/* Use TailwindCSS for layout and styling where possible */}
+      <div className="bg-white flex flex-col h-screen text-xl">
         {screen === "header" && <Header {...{ setVerbs, setScreen, screen }} />}
         {screen === "question" && questionObj &&
           <Stack align="center" mt="xl">

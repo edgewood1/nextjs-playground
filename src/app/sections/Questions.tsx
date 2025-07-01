@@ -1,3 +1,4 @@
+import React from "react";
 import { Stack, Box, Text, Button } from "@mantine/core";
 import { FlashcardArray } from "react-quizlet-flashcard";
 import { QO } from "../types/verbs";
