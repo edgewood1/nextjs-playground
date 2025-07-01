@@ -19,6 +19,7 @@ export const Question = (props: Props) => {
   const cards = question
     ? [
         {
+          id: 0, // The `react-quizlet-flashcard` library requires a unique numeric id.
           front: <Text size="xl">{question}</Text>,
           back: <Text size="xl">{answer}</Text>,
         },

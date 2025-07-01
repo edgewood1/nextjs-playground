@@ -16,7 +16,7 @@ const tenseMap = {
 }
 
 type Flashcard = {
-  id: string;
+  id: number;
   frontHTML: string;
   backHTML: string;
 };
@@ -27,13 +27,13 @@ function createTemplate(var1: string, var2: string, var3: string): string {
 
 // Updated to work with a simple, flat array of VerbConjugation objects.
 function getArray(verbConjugations: VerbConjugation[]) {
-  return verbConjugations.map((verb) => {
+  return verbConjugations.map((verb, index) => {
     const { performer, infinitive, tense, translation } = verb;
     const day = tenseMap[tense as keyof typeof tenseMap];
     
     const stem = createTemplate(day, performer, infinitive)
     return {
-      id: translation,
+      id: index,
       frontHTML: `<div>${stem}</div>`,
       backHTML: `<div>${translation}</div>`
     };

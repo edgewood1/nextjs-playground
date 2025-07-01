@@ -31,7 +31,7 @@ const useQuestion = (verbs: VerbConjugation[]): QO | undefined => {
   const { performer, infinitive, tense, translation, mood } = currentVerb;
 
   // Create the question string.
-  const tensePrefix = tenseMap[tense as keyof typeof tenseMap] || '';
+  const tensePrefix = tenseMap[tense] || '';
   const stem = `${performer} ___ ${infinitive}`;
   const question = `${tensePrefix}${stem}`;
 
@@ -39,7 +39,7 @@ const useQuestion = (verbs: VerbConjugation[]): QO | undefined => {
   return {
     question,
     answer: translation,
-    tense: tense as QO['tense'], // Cast to the specific Tense type
+    tense,
     infinitive,
     mood,
     nextQuestion,

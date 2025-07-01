@@ -16,7 +16,7 @@ export interface VerbConjugation {
   mood: string;
   performer: string;
   performer_en: string;
-  tense: string;
+  tense: Tense;
   translation: string;
 }
 
