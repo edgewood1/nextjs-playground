@@ -3,8 +3,19 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { VerbsData, VerbConjugation } from '@/app/types/verbs';
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const tensesParam = searchParams.get('tenses');
+    const moodsParam = searchParams.get('mood') || 'Indicative'; // Default mood
+
+    if (!tensesParam) {
+      return new NextResponse('Missing tenses parameter', { status: 400 });
+    }
+
+    const tenses = tensesParam.split(',');
+    const moods = moodsParam.split(',');
+
     // Construct the path to the JSON file relative to the project root.
     // This is a more robust way to access files on the server-side than a direct import.
     const jsonPath = path.join(process.cwd(), 'src/data/verbs.json');
@@ -12,13 +23,6 @@ export async function POST(request: Request) {
     const fileContent = await fs.readFile(jsonPath, 'utf8');
     // Parse the JSON data
     const verbsData: VerbsData = JSON.parse(fileContent);
-
-    const body = await request.json();
-    const { tenses, moods } = body;
-
-    if (!Array.isArray(tenses) || !Array.isArray(moods)) {
-      return new NextResponse('Missing or invalid tenses or moods', { status: 400 });
-    }
 
     const filteredVerbs: { [key: string]: VerbConjugation[] } = {};
 

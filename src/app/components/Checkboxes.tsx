@@ -1,55 +1,44 @@
 "use client"; // Mark as Client Component
 
-import React from "react";
+import React, { useState, MouseEventHandler } from "react";
 import GradientButton from "./GradientButton";
-import { Box, Text } from "@mantine/core";
+import { Box, Checkbox, Group } from "@mantine/core";
 
-interface CheckboxProps {
+interface CheckboxesProps {
   items: string[];
   onSubmit: (values: string[]) => void;
 }
 
-function Checkboxes({ items, onSubmit }: CheckboxProps) {
-  const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
+function Checkboxes({ items, onSubmit }: CheckboxesProps) {
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.target.value;
-    if (event.target.checked) {
-      setSelectedValues([...selectedValues, value]);
+  const handleChange = (value: string, checked: boolean) => {
+    if (checked) {
+      setSelectedValues((current) => [...current, value]);
     } else {
-      setSelectedValues(selectedValues.filter((item) => item !== value));
+      setSelectedValues((current) => current.filter((item) => item !== value));
     }
   };
 
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = () => {
+  const handleSubmit: MouseEventHandler<HTMLButtonElement> = () => {
     onSubmit(selectedValues);
   };
 
   return (
     <>
-    <Box ml={5}> {/* Use Mantine's Box with margin prop */}
-      {items.map((item, index) => (
-        <Box key={index} mb={5}> {/* Add some margin bottom for spacing */}
-          <input
-            type="checkbox"
-            id={`option${index}`}
-            value={item}
-            checked={selectedValues.includes(item)}
-            onChange={handleChange}
-            style={{ marginRight: '5px' }} // Keep simple inline style for input or use Mantine's Checkbox
-          />
-              <Text
-                component="label"
-                htmlFor={`option${index}`}
-                c="blue" // Mantine's color prop
-                // pl={5} // Mantine's padding prop if needed, but input margin might be enough
-              >
-                {item}
-              </Text>
-            </Box>
-      ))}
-    </Box>
-      <GradientButton onClick={handleSubmit}>Submit</GradientButton>
+      <Box>
+        <Group>
+          {items.map((item) => (
+            <Checkbox
+              key={item}
+              label={item}
+              checked={selectedValues.includes(item)}
+              onChange={(event) => handleChange(item, event.currentTarget.checked)}
+            />
+          ))}
+        </Group>
+      </Box>
+      <GradientButton onClick={handleSubmit} mt="md">Submit</GradientButton>
     </>
   );
 }
