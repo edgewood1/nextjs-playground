@@ -23,18 +23,17 @@ function createTemplate(var1: string, var2: string, var3: string): string {
   return `${var1} ${var2} <span style="text-decoration: underline;">${var3}</span>`;
 }
 
+// Updated to work with a simple, flat array of VerbConjugation objects.
 function getArray(verbConjugations: VerbConjugation[]) {
-  return verbConjugations.map((verbObj) => {
-    const key = Object.keys(verbObj)[0]; // Get the dynamic key (e.g., 'abandona')
-    const details = verbObj[key]; // Get the inner object
-    const { performer, infinitive, tense } = details;
-    const day = tenseMap[tense];
+  return verbConjugations.map((verb) => {
+    const { performer, infinitive, tense, translation } = verb;
+    const day = tenseMap[tense as keyof typeof tenseMap];
     
     const stem = createTemplate(day, performer, infinitive)
     return {
-      id: key, 
+      id: translation,
       frontHTML: `<div>${stem}</div>`,
-      backHTML: `<div>${key}</div>`
+      backHTML: `<div>${translation}</div>`
     };
   });
 }

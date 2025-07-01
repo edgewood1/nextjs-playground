@@ -4,15 +4,14 @@ import Checkboxes from "../components/Checkboxes";
 import React from "react";
 import { Stack } from "@mantine/core"; // Import Mantine's Stack
 import { VerbsData, VerbConjugation } from "../types/verbs"; // Ensure VerbConjugation is imported
-
-// Helper function to transform VerbsData (object) to VerbConjugation[] (array)
-// This structure is assumed based on typical usage and Body.tsx's formatVerbConjugations
-function transformVerbsDataToArray(verbsData: VerbsData): VerbConjugation[] {
-  return Object.entries(verbsData).map(([key, value]) => ({ [key]: value }));
+interface HeaderProps {
+  setVerbs: React.Dispatch<React.SetStateAction<VerbConjugation[]>>;
+  setScreen: React.Dispatch<React.SetStateAction<string>>;
+  screen: string;
 }
 
-export const Header = (props: any) => {
-  const { setVerbs, setScreen, screen } = props;
+export const Header = (props: HeaderProps) => {
+  const { setVerbs, setScreen } = props;
   const [selectedTenses, setSelectedTenses] = React.useState<string[]>([]);
 
   const checkboxHandler = (e: string[]) => {
@@ -43,8 +42,10 @@ export const Header = (props: any) => {
         `/api/filter-verbs?tenses=${selectedTenses}&mood=Indicative`,
       );
       const fetchedVerbsData: VerbsData = await response.json();
-      const verbsArray = transformVerbsDataToArray(fetchedVerbsData);
-      setVerbs(verbsArray); // setVerbs now expects VerbConjugation[]
+      // Flatten the complex object from the API into a simple array of verbs.
+      // This makes the data much easier to work with in other components.
+      const verbsArray = Object.values(fetchedVerbsData).flat();
+      setVerbs(verbsArray);
       if (verbsArray.length > 0) setScreen("question");
     };
 
