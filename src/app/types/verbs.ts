@@ -29,7 +29,7 @@ export type Context = {
     // hint: number;
     // setHint: React.Dispatch<React.SetStateAction<number>>; // Correct type
     verbs: VerbConjugation[];
-    setVerbs: React.Dispatch<React.SetStateAction<VerbsData>>; // Correct type
+    setVerbs: React.Dispatch<React.SetStateAction<VerbConjugation[]>>;
     verbList: string[];
     // handleCounter: () => void;
     // handleHint: () => void;
