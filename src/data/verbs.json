@@ -1,0 +1,35 @@
+{
+  "hablo": [
+    {
+      "infinitive": "hablar",
+      "has_long": false,
+      "mood": "Indicative",
+      "performer": "yo",
+      "performer_en": "I",
+      "tense": "Present",
+      "translation": "hablo"
+    }
+  ],
+  "como": [
+    {
+      "infinitive": "comer",
+      "has_long": false,
+      "mood": "Indicative",
+      "performer": "yo",
+      "performer_en": "I",
+      "tense": "Present",
+      "translation": "como"
+    }
+  ],
+  "vivo": [
+    {
+      "infinitive": "vivir",
+      "has_long": false,
+      "mood": "Indicative",
+      "performer": "yo",
+      "performer_en": "I",
+      "tense": "Present",
+      "translation": "vivo"
+    }
+  ]
+}

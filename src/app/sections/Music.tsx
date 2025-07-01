@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Button as MantineButton } from '@mantine/core'; // Import Mantine Button
 
 const songs = ['Ida Red', 'Mississippi Sawyer', 'Molly Hare', 'Road to Malvern', 'Johnny dont get drunk'];
@@ -46,28 +46,27 @@ function AudioPlayer() {
     }
   };
 
-  const createSongChoices = () => {
+  const songChoices = useMemo(() => {
     // Shuffle the songs array to create random choices
     const shuffledSongs = [...songs].sort(() => 0.5 - Math.random());
     return shuffledSongs.map((song) => (
       <MantineButton
         key={song}
         onClick={() => handleSongSelect(song)}
-        variant="outline" // Example: choose a Mantine variant
-        m="xs" // Add some margin
-        // sx={{ ... }} // Add custom styles here if needed to replicate button.css
+        variant="outline"
+        m="xs"
       >
         {song}
       </MantineButton>
     ));
-  };
+  }, [currentSong]); // Reruns when a new song is loaded to ensure choices are reshuffled.
 
   return (
     <div>
       <audio ref={audioRef} controls />
 
       <div>
-        {createSongChoices()}
+        {songChoices}
       </div>
 
       {selectedSong && isCorrect !== null && (

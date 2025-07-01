@@ -1,13 +1,18 @@
 import { NextResponse } from 'next/server';
-import verbsJson from '@/data/verbs.json';
+import { promises as fs } from 'fs';
+import path from 'path';
 import { VerbsData, VerbConjugation } from '@/app/types/verbs';
-
-// By explicitly casting the imported JSON to the VerbsData type,
-// we inform TypeScript that it has an index signature, which resolves the error.
-const verbsData: VerbsData = verbsJson;
 
 export async function POST(request: Request) {
   try {
+    // Construct the path to the JSON file relative to the project root.
+    // This is a more robust way to access files on the server-side than a direct import.
+    const jsonPath = path.join(process.cwd(), 'src/data/verbs.json');
+    // Read the file content
+    const fileContent = await fs.readFile(jsonPath, 'utf8');
+    // Parse the JSON data
+    const verbsData: VerbsData = JSON.parse(fileContent);
+
     const body = await request.json();
     const { tenses, moods } = body;
 
@@ -33,6 +38,9 @@ export async function POST(request: Request) {
     return NextResponse.json(filteredVerbs);
   } catch (error) {
     console.error('FILTER_VERBS_ERROR', error);
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      return new NextResponse('Verbs data file not found.', { status: 500 });
+    }
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
