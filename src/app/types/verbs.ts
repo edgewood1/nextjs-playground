@@ -40,7 +40,7 @@ export type Context = {
 export type QO = {
     answer: string;
     question: string;
-    tense: Tense | undefined;  // Allow tense to be undefined
+    tense: Tense;
     infinitive: string;
     mood: string;
     verbEnding?: VerbEnding;
