@@ -37,14 +37,14 @@ function AudioPlayer() {
     loadRandomSong(); // Load a random song when the component mounts
   }, [loadRandomSong]);
 
-  const handleSongSelect = (song: string) => {
+  const handleSongSelect = useCallback((song: string) => {
     setSelectedSong(song);
     setIsCorrect(song === currentSong);
 
     if (song === currentSong) {
       setTimeout(loadRandomSong, 2000); // Load a new song after 2 seconds
     }
-  };
+  }, [currentSong, loadRandomSong]);
 
   const songChoices = useMemo(() => {
     // Shuffle the songs array to create random choices
@@ -59,7 +59,7 @@ function AudioPlayer() {
         {song}
       </MantineButton>
     ));
-  }, [currentSong]); // Reruns when a new song is loaded to ensure choices are reshuffled.
+  }, [currentSong, handleSongSelect]); // Reruns when a new song is loaded to ensure choices are reshuffled.
 
   return (
     <div>

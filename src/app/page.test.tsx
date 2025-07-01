@@ -5,13 +5,20 @@ import Home from './page';
 import { MantineProvider } from '@mantine/core';
 
 // Mock Next.js Link component for testing, as it's not available in a standard Jest environment.
+// This pattern with a named function and displayName satisfies ESLint rules.
 jest.mock('next/link', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return ({ children, href, ...rest }: { children: React.ReactNode; href: string;[key: string]: any }) => {
-    // The `passHref` and `component="a"` props on the Button inside Link
-    // mean we should render an `a` tag.
+  const MockLink = ({
+    children,
+    href,
+    ...rest
+  }: {
+    children: React.ReactNode;
+    href: string;
+  }) => {
     return <a href={href} {...rest}>{children}</a>;
   };
+  MockLink.displayName = 'MockLink';
+  return MockLink;
 });
 
 describe('Home Component', () => {
