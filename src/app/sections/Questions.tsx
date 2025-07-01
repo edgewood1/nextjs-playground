@@ -1,13 +1,9 @@
 import { Stack, Box, Text, Button } from "@mantine/core";
 import { FlashcardArray } from "react-quizlet-flashcard";
+import { QO } from "../types/verbs";
 
 type Props = {
-  questionObj: {
-    question: React.ReactNode;
-    answer: React.ReactNode;
-    nextQuestion: () => void;
-    mood: string;
-  };
+  questionObj: QO;
 };
 
 export const Question = (props: Props) => {
@@ -20,8 +16,8 @@ export const Question = (props: Props) => {
     ? [
         {
           id: 0, // The `react-quizlet-flashcard` library requires a unique numeric id.
-          front: <Text size="xl">{question}</Text>,
-          back: <Text size="xl">{answer}</Text>,
+          frontHTML: <Text size="xl">{question}</Text>,
+          backHTML: <Text size="xl">{answer}</Text>,
         },
       ]
     : [];
