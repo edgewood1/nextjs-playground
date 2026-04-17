@@ -53,8 +53,8 @@ export function LoginForm() {
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput label="Email" placeholder="you@mantine.dev" required {...form.getInputProps('email')} />
-          <PasswordInput label="Password" placeholder="Your password" required mt="md" {...form.getInputProps('password')} />
+          <TextInput label="Email" placeholder="you@example.com" required autoComplete="username" {...form.getInputProps('email')} />
+          <PasswordInput label="Password" placeholder="Your password" required mt="md" autoComplete="current-password" {...form.getInputProps('password')} />
           {error && <Text c="red" size="sm" ta="center" mt="md">{error}</Text>}
           <Button fullWidth mt="xl" type="submit">
             Sign in

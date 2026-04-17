@@ -18,7 +18,14 @@ export function RegisterForm() {
     },
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value.length < 6 ? 'Password must have at least 6 characters' : null),
+      password: (value) => {
+        if (value.length < 12) return 'Password must be at least 12 characters';
+        if (!/[A-Z]/.test(value)) return 'Password must contain an uppercase letter';
+        if (!/[a-z]/.test(value)) return 'Password must contain a lowercase letter';
+        if (!/[0-9]/.test(value)) return 'Password must contain a number';
+        if (!/[^A-Za-z0-9]/.test(value)) return 'Password must contain a special character';
+        return null;
+      },
     },
   });
 
@@ -64,18 +71,22 @@ export function RegisterForm() {
               required
               label="Name"
               placeholder="Your Name"
+              autoComplete="name"
               {...form.getInputProps('name')}
             />
             <TextInput
               required
               label="Email"
-              placeholder="hello@mantine.dev"
+              placeholder="hello@example.com"
+              autoComplete="username"
               {...form.getInputProps('email')}
             />
             <PasswordInput
               required
               label="Password"
               placeholder="Your password"
+              autoComplete="new-password"
+              description="12+ characters with uppercase, lowercase, number, and special character"
               {...form.getInputProps('password')}
             />
             {error && <Text c="red" size="sm" mt="xs">{error}</Text>}
